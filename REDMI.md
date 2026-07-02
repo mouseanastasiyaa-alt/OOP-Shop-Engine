@@ -19,7 +19,24 @@
   - category_count (общее количество категорий) - атрибут класса
   - product_count (общее количество товаров) - атрибут класса
 
-## Установка
+## Технологии:
+- Python 3.14
+- Poetry - управление зависимостями
+- Pytest - тестирование
+- Ruff - линтер
+- Black - форматтер
+
+## Быстрый старт:
 
 ```bash
+# Установка зависимостей
 poetry install
+
+# Запуск программы
+poetry run python src/main.py
+
+# Запуск тестов
+poetry run pytest tests/ -v
+
+# Проверка покрытия
+poetry run pytest --cov=src --cov-report=term tests/
