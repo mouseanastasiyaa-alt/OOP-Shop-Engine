@@ -4,36 +4,34 @@
 
 ## Описание проекта
 
-В этом проекте реализованы базовые классы для интернет-магазина:
+Реализованы базовые классы для интернет-магазина:
 
 - **Product** - класс для представления товара
-  - name (название)
-  - description (описание)
-  - price (цена)
-  - quantity (количество)
-
 - **Category** - класс для представления категории товаров
-  - name (название)
-  - description (описание)
-  - products (список товаров в категории)
-  - category_count (общее количество категорий) - атрибут класса
-  - product_count (общее количество товаров) - атрибут класса
 
-## Технологии:
-- Python 3.14
-- Poetry - управление зависимостями
-- Pytest - тестирование
-- Ruff - линтер
-- Black - форматтер
+## Структура проекта
+oop-shop-engine/
+├── src/
+│ ├── init.py # Инициализация пакета
+│ ├── product.py # Класс Product
+│ └── category.py # Класс Category
+├── tests/
+│ ├── init.py
+│ ├── conftest.py # Фикстуры для тестов
+│ ├── test_product.py # Тесты для Product
+│ └── test_category.py # Тесты для Category
+├── main.py # Точка входа
+├── pyproject.toml # Конфигурация проекта
+└── README.md # Документация
 
-## Быстрый старт:
+## Установка и запуск
 
 ```bash
 # Установка зависимостей
 poetry install
 
 # Запуск программы
-poetry run python src/main.py
+poetry run python main.py
 
 # Запуск тестов
 poetry run pytest tests/ -v

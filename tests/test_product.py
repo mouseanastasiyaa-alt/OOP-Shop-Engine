@@ -21,4 +21,3 @@ class TestProduct:
         """Тест типа количества продукта"""
         product = Product("Test Product", "Test Description", 100.0, 10)
         assert isinstance(product.quantity, int)
-        
