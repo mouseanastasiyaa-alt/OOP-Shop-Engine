@@ -1,5 +1,5 @@
-from src.product import Product
 from src.category import Category
+from src.product import Product
 
 
 class TestCategory:
@@ -13,7 +13,9 @@ class TestCategory:
 
         assert category.name == "Test Category"
         assert category.description == "Test Description"
-        assert len(category._Category__products) == 2
+        # Проверяем через геттер
+        expected = "Product 1, 100.0 руб. Остаток: 5 шт.\nProduct 2, 200.0 руб. Остаток: 3 шт.\n"
+        assert category.products == expected
 
     def test_category_count_increment(self):
         """Тест подсчета количества категорий"""
@@ -52,20 +54,22 @@ class TestCategory:
     def test_category_with_empty_products(self):
         """Тест категории с пустым списком продуктов"""
         initial_count = Category.product_count
-        Category("Empty Category", "No products", [])
+        category = Category("Empty Category", "No products", [])
 
+        assert category.products == ""  # Пустая строка
         assert Category.product_count == initial_count
 
     def test_add_product(self):
         """Тест метода add_product"""
         category = Category("Test", "Desc", [])
-        product = Product("New", "Desc", 100.0, 5)
+        product = Product("New", "Desc", 100.0, 1)
         initial_count = Category.product_count
 
         category.add_product(product)
 
-        assert len(category._Category__products) == 1
-        assert category._Category__products[0] == product
+        # Проверяем через геттер
+        expected = "New, 100.0 руб. Остаток: 1 шт.\n"
+        assert category.products == expected
         assert Category.product_count == initial_count + 1
 
     def test_products_getter(self):
