@@ -1,13 +1,13 @@
 class Product:
     name: str
     description: str
-    price: float
+    __price: float
     quantity: int
 
     def __init__(self, name, description, price, quantity):
         self.name = name
         self.description = description
-        self.price = price
+        self.__price = price
         self.quantity = quantity
 
     @classmethod
@@ -17,7 +17,7 @@ class Product:
             name=product_data.get("name"),
             description=product_data.get("description"),
             price=product_data.get("price"),
-            quantity=product_data.get("quantity"),
+            quantity=product_data.get("quantity")
         )
 
     @property
