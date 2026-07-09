@@ -1,35 +1,8 @@
-class Product:
-    name: str
-    description: str
-    price: float
-    quantity: int
-
-    def __init__(self, name, description, price, quantity):
-        self.name = name
-        self.description = description
-        self.price = price
-        self.quantity = quantity
+from src import Product, Category
 
 
-class Category:
-    name: str
-    description: str
-    products: list
-
-    category_count = 0
-    product_count = 0
-
-    def __init__(self, name, description, products):
-        self.name = name
-        self.description = description
-        self.products = products
-
-        # Автоматическое обновление атрибутов класса
-        Category.category_count += 1
-        Category.product_count += len(products)
-
-
-if __name__ == "__main__":
+def main():
+    """Пример использования классов Product и Category"""
     product1 = Product(
         "Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5
     )
@@ -77,3 +50,8 @@ if __name__ == "__main__":
 
     print(Category.category_count)
     print(Category.product_count)
+
+
+if __name__ == "__main__":
+    main()
+    
