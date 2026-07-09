@@ -27,7 +27,7 @@ class TestProduct:
             "name": "New Product",
             "description": "New Description",
             "price": 150.0,
-            "quantity": 20
+            "quantity": 20,
         }
         product = Product.new_product(product_data)
 
