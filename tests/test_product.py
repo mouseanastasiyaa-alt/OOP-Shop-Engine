@@ -57,3 +57,27 @@ class TestProduct:
         assert product.price == 100.0
         captured = capsys.readouterr()
         assert "Цена не должна быть нулевая или отрицательная" in captured.out
+
+    def test_product_str(self):
+        """Тест строкового представления продукта"""
+        product = Product("Test Product", "Test Description", 100.0, 10)
+        expected = "Test Product, 100.0 руб. Остаток: 10 шт."
+        assert str(product) == expected
+
+    def test_product_add(self):
+        """Тест сложения продуктов"""
+        product1 = Product("Product 1", "Desc 1", 100.0, 10)
+        product2 = Product("Product 2", "Desc 2", 200.0, 2)
+
+        expected = (100.0 * 10) + (200.0 * 2)  # 1000 + 400 = 1400
+        assert product1 + product2 == expected
+
+    def test_product_add_type_error(self):
+        """Тест сложения с неправильным типом"""
+        product = Product("Test", "Desc", 100.0, 10)
+        try:
+            product + "string"
+        except TypeError as e:
+            assert str(e) == "Нельзя сложить Product и str"
+        else:
+            assert False, "Ожидалась TypeError"
