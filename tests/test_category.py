@@ -1,5 +1,7 @@
+import pytest
+
 from src.category import Category
-from src.product import Product
+from src.product import Product, Smartphone, LawnGrass
 
 
 class TestCategory:
@@ -69,6 +71,44 @@ class TestCategory:
         expected = "New, 100.0 руб. Остаток: 1 шт.\n"
         assert category.products == expected
         assert Category.product_count == initial_count + 1
+
+    def test_add_product_smartphone(self):
+        """Тест добавления смартфона в категорию"""
+        category = Category("Test", "Desc", [])
+        phone = Smartphone(
+            "iPhone 15", "Смартфон Apple", 100000.0, 2,
+            "A16 Bionic", "iPhone 15", "256GB", "Black"
+        )
+        initial_count = Category.product_count
+
+        category.add_product(phone)
+
+        expected = "iPhone 15, 100000.0 руб. Остаток: 2 шт.\n"
+        assert category.products == expected
+        assert Category.product_count == initial_count + 1
+
+    def test_add_product_lawn_grass(self):
+        """Тест добавления газонной травы в категорию"""
+        category = Category("Test", "Desc", [])
+        grass = LawnGrass(
+            "Газонная трава", "Трава для газона", 500.0, 100,
+            "Россия", 7, "Зеленый"
+        )
+        initial_count = Category.product_count
+
+        category.add_product(grass)
+
+        expected = "Газонная трава, 500.0 руб. Остаток: 100 шт.\n"
+        assert category.products == expected
+        assert Category.product_count == initial_count + 1
+
+    def test_add_product_invalid_type(self):
+        """Тест добавления невалидного объекта в категорию"""
+        category = Category("Test", "Desc", [])
+
+        with pytest.raises(TypeError) as excinfo:
+            category.add_product("not a product")
+        assert "Можно добавлять только объекты Product или его наследников" in str(excinfo.value)
 
     def test_products_getter(self):
         """Тест геттера products"""

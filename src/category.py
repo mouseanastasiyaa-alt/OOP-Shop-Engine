@@ -1,3 +1,6 @@
+from src.product import Product
+
+
 class Category:
     name: str
     description: str
@@ -15,7 +18,10 @@ class Category:
         Category.product_count += len(products)
 
     def add_product(self, product):
-        """Добавляет продукт в категорию"""
+        """Добавляет продукт в категорию с проверкой типа"""
+        if not isinstance(product, Product):
+            raise TypeError(
+                f"Можно добавлять только объекты Product или его наследников. Получен {type(product).__name__}")
         self.__products.append(product)
         Category.product_count += 1
 
