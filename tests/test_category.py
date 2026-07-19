@@ -76,8 +76,14 @@ class TestCategory:
         """Тест добавления смартфона в категорию"""
         category = Category("Test", "Desc", [])
         phone = Smartphone(
-            "iPhone 15", "Смартфон Apple", 100000.0, 2,
-            "A16 Bionic", "iPhone 15", "256GB", "Black"
+            "iPhone 15",
+            "Смартфон Apple",
+            100000.0,
+            2,
+            "A16 Bionic",
+            "iPhone 15",
+            "256GB",
+            "Black",
         )
         initial_count = Category.product_count
 
@@ -91,8 +97,7 @@ class TestCategory:
         """Тест добавления газонной травы в категорию"""
         category = Category("Test", "Desc", [])
         grass = LawnGrass(
-            "Газонная трава", "Трава для газона", 500.0, 100,
-            "Россия", 7, "Зеленый"
+            "Газонная трава", "Трава для газона", 500.0, 100, "Россия", 7, "Зеленый"
         )
         initial_count = Category.product_count
 
@@ -108,7 +113,9 @@ class TestCategory:
 
         with pytest.raises(TypeError) as excinfo:
             category.add_product("not a product")
-        assert "Можно добавлять только объекты Product или его наследников" in str(excinfo.value)
+        assert "Можно добавлять только объекты Product или его наследников" in str(
+            excinfo.value
+        )
 
     def test_products_getter(self):
         """Тест геттера products"""
