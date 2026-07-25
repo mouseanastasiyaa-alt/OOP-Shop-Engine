@@ -1,3 +1,7 @@
+import pytest
+
+from src.base_product import BaseProduct
+from src.mixin import LogMixin
 from src.product import Product, Smartphone, LawnGrass
 
 
@@ -137,7 +141,13 @@ class TestLawnGrass:
     def test_lawn_grass_initialization(self):
         """Тест инициализации газонной травы"""
         grass = LawnGrass(
-            "Газонная трава", "Трава для газона", 500.0, 100, "Россия", 7, "Зеленый"
+            "Газонная трава",
+            "Трава для газона",
+            500.0,
+            100,
+            "Россия",
+            7,
+            "Зеленый",
         )
         assert grass.name == "Газонная трава"
         assert grass.description == "Трава для газона"
@@ -150,7 +160,13 @@ class TestLawnGrass:
     def test_lawn_grass_str(self):
         """Тест строкового представления газонной травы"""
         grass = LawnGrass(
-            "Газонная трава", "Трава для газона", 500.0, 100, "Россия", 7, "Зеленый"
+            "Газонная трава",
+            "Трава для газона",
+            500.0,
+            100,
+            "Россия",
+            7,
+            "Зеленый",
         )
         expected = "Газонная трава, 500.0 руб. Остаток: 100 шт."
         assert str(grass) == expected
@@ -162,3 +178,67 @@ class TestLawnGrass:
         result = grass1 + grass2
         expected = (500.0 * 10) + (300.0 * 20)
         assert result == expected
+
+
+class TestBaseProduct:
+    def test_base_product_is_abstract(self):
+        """Тест, что BaseProduct - абстрактный класс"""
+        assert hasattr(BaseProduct, "__abstractmethods__")
+        # Проверяем, что все абстрактные методы есть
+        abstract_methods = BaseProduct.__abstractmethods__
+        assert "__add__" in abstract_methods
+        assert "__str__" in abstract_methods
+        assert "price" in abstract_methods
+
+    def test_base_product_cannot_be_instantiated(self):
+        """Тест, что нельзя создать экземпляр BaseProduct"""
+        with pytest.raises(TypeError) as excinfo:
+            BaseProduct()
+        # Проверяем, что ошибка связана с абстрактным классом
+        assert "Can't instantiate abstract class" in str(excinfo.value) or "abstract" in str(
+            excinfo.value
+        ).lower()
+
+
+class TestLogMixin:
+    def test_log_mixin_creation(self, capsys):
+        """Тест логирования создания объекта"""
+
+        class TestClass(LogMixin):
+            def __init__(self, name, value):
+                super().__init__(name, value)
+
+        # Создаем объект
+        obj = TestClass("test", 123)
+
+        # Проверяем вывод
+        captured = capsys.readouterr()
+        assert "TestClass('test', 123)" in captured.out
+
+    def test_log_mixin_with_kwargs(self, capsys):
+        """Тест логирования с именованными аргументами"""
+
+        class TestClass(LogMixin):
+            def __init__(self, name, value):
+                super().__init__(name=name, value=value)
+
+        # Создаем объект
+        obj = TestClass(name="test", value=123)
+
+        # Проверяем вывод
+        captured = capsys.readouterr()
+        assert "TestClass(name='test', value=123)" in captured.out
+
+    def test_log_mixin_empty_args(self, capsys):
+        """Тест логирования без аргументов"""
+
+        class TestClass(LogMixin):
+            def __init__(self):
+                super().__init__()
+
+        # Создаем объект
+        obj = TestClass()
+
+        # Проверяем вывод
+        captured = capsys.readouterr()
+        assert "TestClass()" in captured.out
