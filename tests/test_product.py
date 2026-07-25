@@ -196,8 +196,8 @@ class TestBaseProduct:
             BaseProduct()
         # Проверяем, что ошибка связана с абстрактным классом
         assert (
-                "Can't instantiate abstract class" in str(excinfo.value)
-                or "abstract" in str(excinfo.value).lower()
+            "Can't instantiate abstract class" in str(excinfo.value)
+            or "abstract" in str(excinfo.value).lower()
         )
 
 
