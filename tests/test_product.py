@@ -196,8 +196,8 @@ class TestBaseProduct:
             BaseProduct()
         # Проверяем, что ошибка связана с абстрактным классом
         assert (
-            "Can't instantiate abstract class" in str(excinfo.value)
-            or "abstract" in str(excinfo.value).lower()
+                "Can't instantiate abstract class" in str(excinfo.value)
+                or "abstract" in str(excinfo.value).lower()
         )
 
 
@@ -215,6 +215,9 @@ class TestLogMixin:
         # Проверяем вывод
         captured = capsys.readouterr()
         assert "TestClass('test', 123)" in captured.out
+        # Проверяем, что объект создался
+        assert obj is not None
+        assert obj.__class__.__name__ == "TestClass"
 
     def test_log_mixin_with_kwargs(self, capsys):
         """Тест логирования с именованными аргументами"""
@@ -224,7 +227,7 @@ class TestLogMixin:
                 super().__init__(name=name, value=value)
 
         # Создаем объект
-        obj = TestClass(name="test", value=123)
+        TestClass(name="test", value=123)
 
         # Проверяем вывод
         captured = capsys.readouterr()
@@ -238,7 +241,7 @@ class TestLogMixin:
                 super().__init__()
 
         # Создаем объект
-        obj = TestClass()
+        TestClass()
 
         # Проверяем вывод
         captured = capsys.readouterr()
