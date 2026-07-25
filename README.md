@@ -4,7 +4,8 @@
 
 ## Описание проекта
 
-В этом проекте реализованы базовые классы для интернет-магазина с инкапсуляцией, наследованием и магическими методами.
+В этом проекте реализованы базовые классы для интернет-магазина с инкапсуляцией, наследованием, абстрактными классами и
+миксинами.
 
 ### Класс Product
 
@@ -14,6 +15,7 @@
 - **Сеттер**: `price` - устанавливает цену с проверкой
 - **Класс-метод**: `new_product()` - создает продукт из словаря
 - **Магические методы**: `__str__`, `__add__`
+- **Наследование**: от `BaseProduct` и `LogMixin`
 
 ### Класс Category
 
@@ -24,63 +26,46 @@
 - **Геттер**: `products` - возвращает строковое представление
 - **Магический метод**: `__str__`
 
+### Абстрактный класс BaseProduct
+
+Создан абстрактный базовый класс `BaseProduct`, который определяет обязательные методы для всех продуктов:
+
+- `__str__()` - строковое представление продукта
+- `price` - геттер и сеттер для цены
+- `__add__()` - сложение продуктов
+
+### Класс-миксин LogMixin
+
+Реализован класс-миксин `LogMixin`, который автоматически логирует создание объектов:
+
+```python
+Product('Samsung Galaxy S23 Ultra', '256GB, Серый цвет, 200MP камера', 180000.0, 5)
+Smartphone('iPhone 15 Pro', 'Смартфон Apple', 120000.0, 3, 'A17 Pro', 'iPhone 15 Pro', '256GB', 'Titanium')
+
 ### Классы-наследники
+- Smartphone (наследник Product)
+- Добавлены атрибуты: efficiency, model, memory, color
+- LawnGrass (наследник Product)
+- Добавлены атрибуты: country, germination_period, color
 
-- **Smartphone** (наследник `Product`)
-    - Добавлены атрибуты: `efficiency`, `model`, `memory`, `color`
-- **LawnGrass** (наследник `Product`)
-    - Добавлены атрибуты: `country`, `germination_period`, `color`
-
-## Структура проекта
-
+Структура проекта
 oop-shop-engine/
 ├── src/
-│ ├── init.py # Инициализация пакета
-│ ├── product.py # Классы Product, Smartphone, LawnGrass
-│ └── category.py # Класс Category
+│   ├── __init__.py          # Инициализация пакета
+│   ├── base_product.py      # Абстрактный класс BaseProduct
+│   ├── mixin.py             # Класс-миксин LogMixin
+│   ├── product.py           # Классы Product, Smartphone, LawnGrass
+│   └── category.py          # Класс Category
 ├── tests/
-│ ├── init.py
-│ ├── conftest.py # Фикстуры
-│ ├── test_product.py # Тесты для Product и наследников
-│ └── test_category.py # Тесты для Category
-├── main.py # Точка входа
+│   ├── __init__.py
+│   ├── conftest.py          # Фикстуры
+│   ├── test_product.py      # Тесты для Product и наследников
+│   └── test_category.py     # Тесты для Category
+├── main.py                  # Точка входа
 ├── data/
-│ └── data.json # Данные для загрузки (опционально)
-├── pyproject.toml # Конфигурация проекта
-├── poetry.lock # Зависимости
-├── check_all.bat # Скрипт для полной проверки
-└── README.md # Документация
+│   └── data.json            # Данные для загрузки (опционально)
+├── pyproject.toml           # Конфигурация проекта
+├── poetry.lock              # Зависимости
+├── check_all.bat            # Скрипт для полной проверки
+└── README.md                # Документация
 
-## Установка и запуск
-
-```bash
-# Клонирование репозитория
-git clone https://github.com/mouseanastasiyaa-alt/OOP-Shop-Engine.git
-
-# Установка зависимостей
-poetry install
-
-# Запуск программы
-poetry run python main.py
-## 📊 Отчет о покрытии тестами
-
-Покрытие функционального кода составляет **100%** (более 75%).
-
-| Файл | Строк | Покрыто | Процент |
-|------|-------|---------|---------|
-| src/product.py | 36 | 36 | 100% |
-| src/category.py | 24 | 24 | 100% |
-| src/__init__.py | 3 | 3 | 100% |
-| **Итого** | **63** | **63** | **100%** |
-
-### Как проверить покрытие локально:
-
-```bash
-# Установить зависимости
-poetry install
-
-# Запустить тесты с покрытием
-poetry run pytest --cov=src --cov-report=html tests/
-
-# Открыть отчет в браузере
-start htmlcov/index.html

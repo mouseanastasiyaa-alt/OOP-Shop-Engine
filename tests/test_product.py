@@ -27,7 +27,7 @@ class TestProduct:
             "name": "New Product",
             "description": "New Description",
             "price": 150.0,
-            "quantity": 20
+            "quantity": 20,
         }
         product = Product.new_product(product_data)
 
@@ -87,8 +87,14 @@ class TestSmartphone:
     def test_smartphone_initialization(self):
         """Тест инициализации смартфона"""
         phone = Smartphone(
-            "iPhone 15", "Смартфон Apple", 100000.0, 10,
-            "A16 Bionic", "iPhone 15", "256GB", "Black"
+            "iPhone 15",
+            "Смартфон Apple",
+            100000.0,
+            10,
+            "A16 Bionic",
+            "iPhone 15",
+            "256GB",
+            "Black",
         )
         assert phone.name == "iPhone 15"
         assert phone.description == "Смартфон Apple"
@@ -102,16 +108,26 @@ class TestSmartphone:
     def test_smartphone_str(self):
         """Тест строкового представления смартфона"""
         phone = Smartphone(
-            "iPhone 15", "Смартфон Apple", 100000.0, 10,
-            "A16 Bionic", "iPhone 15", "256GB", "Black"
+            "iPhone 15",
+            "Смартфон Apple",
+            100000.0,
+            10,
+            "A16 Bionic",
+            "iPhone 15",
+            "256GB",
+            "Black",
         )
         expected = "iPhone 15, 100000.0 руб. Остаток: 10 шт."
         assert str(phone) == expected
 
     def test_smartphone_add_same_type(self):
         """Тест сложения двух смартфонов"""
-        phone1 = Smartphone("iPhone 15", "Desc", 100000.0, 2, "A16", "15", "256GB", "Black")
-        phone2 = Smartphone("Samsung S23", "Desc", 80000.0, 3, "Snapdragon", "S23", "256GB", "White")
+        phone1 = Smartphone(
+            "iPhone 15", "Desc", 100000.0, 2, "A16", "15", "256GB", "Black"
+        )
+        phone2 = Smartphone(
+            "Samsung S23", "Desc", 80000.0, 3, "Snapdragon", "S23", "256GB", "White"
+        )
         result = phone1 + phone2
         expected = (100000.0 * 2) + (80000.0 * 3)
         assert result == expected
@@ -121,8 +137,7 @@ class TestLawnGrass:
     def test_lawn_grass_initialization(self):
         """Тест инициализации газонной травы"""
         grass = LawnGrass(
-            "Газонная трава", "Трава для газона", 500.0, 100,
-            "Россия", 7, "Зеленый"
+            "Газонная трава", "Трава для газона", 500.0, 100, "Россия", 7, "Зеленый"
         )
         assert grass.name == "Газонная трава"
         assert grass.description == "Трава для газона"
@@ -135,8 +150,7 @@ class TestLawnGrass:
     def test_lawn_grass_str(self):
         """Тест строкового представления газонной травы"""
         grass = LawnGrass(
-            "Газонная трава", "Трава для газона", 500.0, 100,
-            "Россия", 7, "Зеленый"
+            "Газонная трава", "Трава для газона", 500.0, 100, "Россия", 7, "Зеленый"
         )
         expected = "Газонная трава, 500.0 руб. Остаток: 100 шт."
         assert str(grass) == expected

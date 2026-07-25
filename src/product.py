@@ -21,7 +21,7 @@ class Product(BaseProduct, LogMixin):
             name=product_data.get("name"),
             description=product_data.get("description"),
             price=product_data.get("price"),
-            quantity=product_data.get("quantity")
+            quantity=product_data.get("quantity"),
         )
 
     @property
@@ -44,14 +44,18 @@ class Product(BaseProduct, LogMixin):
     def __add__(self, other):
         """Сложение продуктов (общая стоимость)"""
         if type(self) is not type(other):
-            raise TypeError(f"Нельзя складывать {type(self).__name__} и {type(other).__name__}")
+            raise TypeError(
+                f"Нельзя складывать {type(self).__name__} и {type(other).__name__}"
+            )
         return (self.price * self.quantity) + (other.price * other.quantity)
 
 
 class Smartphone(Product):
     """Класс для смартфонов"""
 
-    def __init__(self, name, description, price, quantity, efficiency, model, memory, color):
+    def __init__(
+        self, name, description, price, quantity, efficiency, model, memory, color
+    ):
         super().__init__(name, description, price, quantity)
         self.efficiency = efficiency
         self.model = model
@@ -62,7 +66,9 @@ class Smartphone(Product):
 class LawnGrass(Product):
     """Класс для газонной травы"""
 
-    def __init__(self, name, description, price, quantity, country, germination_period, color):
+    def __init__(
+        self, name, description, price, quantity, country, germination_period, color
+    ):
         super().__init__(name, description, price, quantity)
         self.country = country
         self.germination_period = germination_period
