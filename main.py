@@ -1,9 +1,10 @@
-from src import Product, Category, Smartphone, LawnGrass
+from src import Product, Category, Smartphone, LawnGrass, BaseProduct
 
 
 def main():
     """Пример использования классов Product, Category и наследников"""
 
+    print("=== Создание продуктов ===")
     # Создаем продукты
     product1 = Product(
         "Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5
@@ -11,6 +12,7 @@ def main():
     product2 = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
     product3 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 14)
 
+    print("\n=== Создание смартфонов ===")
     # Создаем смартфоны
     smartphone1 = Smartphone(
         "iPhone 15 Pro", "Смартфон Apple", 120000.0, 3,
@@ -21,6 +23,7 @@ def main():
         "Snapdragon 8 Gen 3", "Galaxy S24", "256GB", "Black"
     )
 
+    print("\n=== Создание газонной травы ===")
     # Создаем газонную траву
     grass1 = LawnGrass(
         "Газонная трава Premium", "Трава для газона", 500.0, 100,
@@ -31,22 +34,18 @@ def main():
         "Россия", 5, "Зеленый"
     )
 
-    # Выводим информацию
-    print("=== Продукты ===")
+    print("\n=== Продукты ===")
     print(product1)
     print(product2)
     print(product3)
-    print()
 
-    print("=== Смартфоны ===")
+    print("\n=== Смартфоны ===")
     print(smartphone1)
     print(smartphone2)
-    print()
 
-    print("=== Газонная трава ===")
+    print("\n=== Газонная трава ===")
     print(grass1)
     print(grass2)
-    print()
 
     # Создаем категории
     category1 = Category(
@@ -61,24 +60,26 @@ def main():
         [grass1, grass2]
     )
 
-    print("=== Категории ===")
+    print("\n=== Категории ===")
     print(category1)
     print(category2)
-    print()
 
     # Проверка сложения продуктов
-    print("=== Сложение продуктов ===")
+    print("\n=== Сложение продуктов ===")
     print(f"Сумма смартфонов: {smartphone1 + smartphone2}")
     print(f"Сумма травы: {grass1 + grass2}")
     print(f"Сумма обычных продуктов: {product1 + product2}")
-    print()
 
     # Проверка добавления невалидного объекта
-    print("=== Проверка добавления невалидного объекта ===")
+    print("\n=== Проверка добавления невалидного объекта ===")
     try:
         category1.add_product("not a product")
     except TypeError as e:
         print(f"Ошибка: {e}")
+
+    # Проверка абстрактного класса
+    print("\n=== Проверка абстрактного класса ===")
+    print(f"BaseProduct - абстрактный класс: {hasattr(BaseProduct, '__abstractmethods__')}")
 
 
 if __name__ == "__main__":
