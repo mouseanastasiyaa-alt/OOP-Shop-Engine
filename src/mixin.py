@@ -8,10 +8,13 @@ class LogMixin:
         # Формируем строку с параметрами
         params = ", ".join([repr(arg) for arg in args])
         if kwargs:
-            params += ", " + ", ".join([f"{k}={repr(v)}" for k, v in kwargs.items()])
+            if params:
+                params += ", "
+            params += ", ".join([f"{k}={repr(v)}" for k, v in kwargs.items()])
 
         # Выводим информацию о создании объекта
         print(f"{class_name}({params})")
 
         # Вызываем следующий конструктор в цепочке наследования
-        super().__init__(*args, **kwargs)
+        # super() без аргументов не передает их в object.__init__
+        super().__init__()
