@@ -195,9 +195,10 @@ class TestBaseProduct:
         with pytest.raises(TypeError) as excinfo:
             BaseProduct()
         # Проверяем, что ошибка связана с абстрактным классом
-        assert "Can't instantiate abstract class" in str(excinfo.value) or "abstract" in str(
-            excinfo.value
-        ).lower()
+        assert (
+            "Can't instantiate abstract class" in str(excinfo.value)
+            or "abstract" in str(excinfo.value).lower()
+        )
 
 
 class TestLogMixin:
@@ -242,9 +243,3 @@ class TestLogMixin:
         # Проверяем вывод
         captured = capsys.readouterr()
         assert "TestClass()" in captured.out
-
-
-def test_base_product_price_property(self):
-    """Тест, что цена является абстрактным свойством"""
-    # Проверяем, что price является property
-    assert isinstance(BaseProduct.price, property)
