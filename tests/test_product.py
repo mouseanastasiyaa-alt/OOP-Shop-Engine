@@ -242,3 +242,9 @@ class TestLogMixin:
         # Проверяем вывод
         captured = capsys.readouterr()
         assert "TestClass()" in captured.out
+
+
+def test_base_product_price_property(self):
+    """Тест, что цена является абстрактным свойством"""
+    # Проверяем, что price является property
+    assert isinstance(BaseProduct.price, property)
