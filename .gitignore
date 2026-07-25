@@ -1,0 +1,52 @@
+# Виртуальное окружение
+venv/
+env/
+ENV/
+.venv
+
+# Poetry
+poetry.lock
+
+# Отчеты о покрытии
+htmlcov/
+.coverage
+.coverage.*
+.coverage_data/
+coverage.xml
+*.cover
+*.py,cover
+.pytest_cache/
+__pycache__/
+*.pyc
+
+# Редакторы
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Ruff
+.ruff_cache/
+
+# Файлы логов
+*.log
+
+# Временные файлы
+*.tmp
+*.temp
+
+# Файлы окружения
+.env
+.env.local
+.env.*.local
+
+# Архивы
+*.zip
+*.tar.gz
+*.rar
+
+# Скрипты
+check_all.bat
+run_tests.bat
