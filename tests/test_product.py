@@ -196,8 +196,8 @@ class TestBaseProduct:
             BaseProduct()
         # Проверяем, что ошибка связана с абстрактным классом
         assert (
-                "Can't instantiate abstract class" in str(excinfo.value)
-                or "abstract" in str(excinfo.value).lower()
+            "Can't instantiate abstract class" in str(excinfo.value)
+            or "abstract" in str(excinfo.value).lower()
         )
 
 
@@ -253,4 +253,6 @@ class TestProductExceptions:
         """Тест создания продукта с нулевым количеством"""
         with pytest.raises(ValueError) as excinfo:
             Product("Test", "Desc", 100.0, 0)
-        assert str(excinfo.value) == "Товар с нулевым количеством не может быть добавлен"
+        assert (
+            str(excinfo.value) == "Товар с нулевым количеством не может быть добавлен"
+        )
