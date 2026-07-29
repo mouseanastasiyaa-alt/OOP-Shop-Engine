@@ -8,7 +8,7 @@ ENV/
 poetry.lock
 
 # Отчеты о покрытии
-htmlcov/
+# htmlcov/
 .coverage
 .coverage.*
 .coverage_data/
