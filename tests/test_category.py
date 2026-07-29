@@ -142,3 +142,17 @@ class TestCategory:
         category = Category("Empty Category", "No products", [])
         expected = "Empty Category, количество продуктов: 0 шт."
         assert str(category) == expected
+
+
+class TestCategoryAveragePrice:
+    def test_average_price(self):
+        """Тест подсчета среднего ценника"""
+        product1 = Product("Product 1", "Desc", 100.0, 5)
+        product2 = Product("Product 2", "Desc", 200.0, 3)
+        category = Category("Test", "Desc", [product1, product2])
+        assert category.average_price() == 150.0
+
+    def test_average_price_empty_category(self):
+        """Тест среднего ценника для пустой категории"""
+        category = Category("Empty", "Desc", [])
+        assert category.average_price() == 0
